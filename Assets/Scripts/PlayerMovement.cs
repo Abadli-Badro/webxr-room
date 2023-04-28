@@ -111,7 +111,9 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-        
-    return Directions;
+        for(int x = 0; x<4; x++){ 
+        Debug.Log(Directions[x]);
+        }
+        return Directions;
     }
 }

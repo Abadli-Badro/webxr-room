@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject youWin;
     [SerializeField] private GameObject menu;
 
-    public float Scale = 0.5f;
+    public float Scale = 0.2f;
     public float offsetX = 0f;
     public float offsetY = 0f;
     public float offsetZ = 1f;
@@ -88,8 +88,8 @@ public class GameManager : MonoBehaviour
                 floorChild.transform.parent = gameObject.transform;
                 break;
             case 0:
-                floorChild = Instantiate(floor, new Vector3(x, offsetZ-Scale, z), floor.transform.rotation);
-                floorChild.transform.parent = gameObject.transform;
+                  floorChild = Instantiate(floor, new Vector3(x, offsetZ-Scale, z), floor.transform.rotation);
+                  floorChild.transform.parent = gameObject.transform;
                 break;
             case 1:
                 var ArrivalTriggerChild =  Instantiate(ArrivalTrigger, new Vector3(x, offsetZ, z), floor.transform.rotation);

@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BoxMovement : MonoBehaviour
 {
 
     private PlayerMovement player;
+    private GameManager gameManager;
 
     private void Start()
     {
+        gameManager = GameManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
     private void OnMouseDown()
@@ -19,8 +22,7 @@ public class BoxMovement : MonoBehaviour
 
     private void Update()
     {
-        if(!player.isColored &&
-            GetComponent<MeshRenderer>().material.color == Color.blue)
+        if (!player.isColored && GetComponent<MeshRenderer>().material.color == Color.blue)
             GetComponent<MeshRenderer>().material.color = new Color(0.254f, 0.169f, 0.063f, 1f);
     }
 
@@ -28,12 +30,12 @@ public class BoxMovement : MonoBehaviour
     public void PushBox()
     {
         Vector3[] directions = player.DetectBoxObjects();
-        for (int i=0; i<4; i++)
+        for (int i = 0; i < 4; i++)
         {
-            if (CanMove(directions[i] * 0.2f) && transform.position*0.2f - player.transform.position*0.2f == directions[i]*0.2f)
+            if (CanMove(directions[i] * gameManager.Scale) && transform.position - player.transform.position == directions[i] * gameManager.Scale)
             {
-                transform.Translate(directions[i] * 0.2f);
-                player.transform.Translate(directions[i] * 0.2f);
+                transform.Translate(directions[i] * gameManager.Scale);
+                player.transform.Translate(directions[i] * gameManager.Scale);
                 player.isColored = false;
                 if (player.isColored)
                     GetComponent<MeshRenderer>().material.color = Color.blue;
@@ -43,31 +45,37 @@ public class BoxMovement : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    float rayLength = 1f;
-    [SerializeField]
-    float rayOffsetX = 0.5f;
-    [SerializeField]
-    float rayOffsetY = 0.5f;
-    [SerializeField]
-    float rayOffsetZ = 0.5f;
-    
+   
+
 
     public bool CanMove(Vector3 direction)
     {
+        // Define the length of the raycast
+        float raycastDistance = gameManager.Scale;
+
+        // Cast a ray in the given direction to detect obstacles
         RaycastHit hit;
-        if ((Vector3.Equals(Vector3.forward * 0.2f , direction *0.2f) || Vector3.Equals(Vector3.back, direction* 0.2f)))
+        bool hasObstacle = Physics.Raycast(transform.position, direction, out hit, raycastDistance);
+
+        // If the raycast hits something, check its tag
+        if (hasObstacle)
         {
-            if (Physics.Raycast(transform.position + Vector3.up * 0.2f + Vector3.right * 0.2f, direction * 0.2f, out hit, rayLength) && (hit.transform.gameObject.CompareTag("Box") || hit.transform.gameObject.CompareTag("Wall"))) return false;
-            if (Physics.Raycast(transform.position + Vector3.up * 0.2f - Vector3.right * 0.2f, direction * 0.2f, out hit, rayLength) && (hit.transform.gameObject.CompareTag("Box") || hit.transform.gameObject.CompareTag("Wall"))) return false;
-        }
-        else if (Vector3.Equals(Vector3.left * 0.2f, direction * 0.2f) || Vector3.Equals(Vector3.right * 0.2f, direction * 0.2f))
-        {
-            if (Physics.Raycast(transform.position + Vector3.up * 0.2f + Vector3.forward * 0.2f, direction * 0.2f, out hit, rayLength) && (hit.transform.gameObject.CompareTag("Box") || hit.transform.gameObject.CompareTag("Wall"))) return false;
-            if (Physics.Raycast(transform.position + Vector3.up * 0.2f - Vector3.forward * 0.2f, direction * 0.2f, out hit, rayLength) && (hit.transform.gameObject.CompareTag("Box") || hit.transform.gameObject.CompareTag("Wall"))) return false;
+            // If the obstacle is a wall, the box cannot move
+            if (hit.collider.CompareTag("Wall"))
+            {
+                return false;
+            }
+            // If the obstacle is another box, check if it can move in the same direction
+            else if (hit.collider.CompareTag("Box"))
+            {
+                Box box = hit.collider.GetComponent<Box>();
+                return false;
+            }
         }
 
+        // If there is no obstacle, the box can move
         return true;
     }
+
 
 }
