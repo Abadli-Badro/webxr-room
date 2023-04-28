@@ -21,14 +21,14 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(targetPosition);
         startPosition = transform.position;   
     }    
-    
 
-    private void OnMouseDown()
+    public void PlayerClick()
     {
         isColored = !isColored;
         bottom.SetActive(isColored);
         DetectBoxObjects();
     }
+
     public void StopColors()
     {
             isColored = false;

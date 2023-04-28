@@ -6,7 +6,7 @@ public class ChangePosition : MonoBehaviour
 {
     public PlayerMovement player;
 
-    public void OnMouseDown()
+    public void MovePlayer()
     {      
       player.PlayerMove(transform.position);
       transform.parent.gameObject.SetActive(false);

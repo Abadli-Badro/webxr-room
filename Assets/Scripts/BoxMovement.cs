@@ -14,7 +14,7 @@ public class BoxMovement : MonoBehaviour
         gameManager = GameManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
-    private void OnMouseDown()
+    public void MoveBox()
     {
         PushBox();
         player.StopColors();

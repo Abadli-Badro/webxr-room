@@ -3,11 +3,11 @@ using Zinnia.Pointer;
 
 public class PointerInput : MonoBehaviour
 {
-    public void DoIt(ObjectPointer.EventData data)
+    public void Player(ObjectPointer.EventData data)
     {
-        if (data.CollisionData.transform.tag == "ObjectA")
+        if (data.CollisionData.transform.tag == "Player")
         {
-            Debug.Log("can do");
+            Debug.Log("Player method called");
         }
     }
 }

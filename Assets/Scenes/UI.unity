@@ -3058,7 +3058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: Selected.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: DoIt
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: Exited.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
