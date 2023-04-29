@@ -25,14 +25,10 @@ public class PlayerMovement : MonoBehaviour
         isColored = !isColored;
         if (isColored)
         {
-            var destinationLeft = Instantiate(destination, transform.position + (Vector3.left + Vector3.down) * gameManager.Scale, transform.rotation);
-            destinationLeft.transform.parent = transform;
-            var destinationRight = Instantiate(destination, transform.position + (Vector3.right + Vector3.down) * gameManager.Scale, transform.rotation);
-            destinationLeft.transform.parent = transform;
-            var destinationForward = Instantiate(destination, transform.position + (Vector3.forward + Vector3.down) * gameManager.Scale, transform.rotation);
-            destinationForward.transform.parent = transform;
-            var destinationBack = Instantiate(destination, transform.position + (Vector3.back + Vector3.down) * gameManager.Scale, transform.rotation);
-            destinationBack.transform.parent = transform;
+            Instantiate(destination, transform.position + (Vector3.left + Vector3.down) * gameManager.Scale, transform.rotation);
+            Instantiate(destination, transform.position + (Vector3.right + Vector3.down) * gameManager.Scale, transform.rotation);
+            Instantiate(destination, transform.position + (Vector3.forward + Vector3.down) * gameManager.Scale, transform.rotation);
+            Instantiate(destination, transform.position + (Vector3.back + Vector3.down) * gameManager.Scale, transform.rotation);
         }
         else
         {
