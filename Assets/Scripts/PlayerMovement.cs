@@ -6,33 +6,46 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-   
-    [SerializeField] GameObject bottom;
+
 
     public bool isColored = false;
-
-   
-    Vector3 targetPosition;
-    Vector3 startPosition;
-
-    public void PlayerMove(Vector3 destination)
+    GameManager gameManager;
+    [SerializeField] GameObject destination;
+    
+    void Start()
     {
-        targetPosition =  destination - transform.position + new Vector3(0f,0.2f,0f);
-        transform.Translate(targetPosition);
-        startPosition = transform.position;   
-    }    
-
-    public void PlayerClick()
-    {
-        isColored = !isColored;
-        bottom.SetActive(isColored);
-        DetectBoxObjects();
+        Debug.Log("player" + transform.position);
+        gameManager = GameManager.Instance;
     }
 
+
+
+    public void OnMouseDown()
+    {
+        isColored = !isColored;
+        if (isColored)
+        {
+            var destinationLeft = Instantiate(destination, transform.position + (Vector3.left + Vector3.down) * gameManager.Scale, transform.rotation);
+            destinationLeft.transform.parent = transform;
+            var destinationRight = Instantiate(destination, transform.position + (Vector3.right + Vector3.down) * gameManager.Scale, transform.rotation);
+            destinationLeft.transform.parent = transform;
+            var destinationForward = Instantiate(destination, transform.position + (Vector3.forward + Vector3.down) * gameManager.Scale, transform.rotation);
+            destinationForward.transform.parent = transform;
+            var destinationBack = Instantiate(destination, transform.position + (Vector3.back + Vector3.down) * gameManager.Scale, transform.rotation);
+            destinationBack.transform.parent = transform;
+        }
+        else
+        {
+            gameManager.DestroyDestinations();
+        }       
+        DetectBoxObjects();
+    }
+    
     public void StopColors()
     {
-            isColored = false;
-            bottom.SetActive(false);
+           Debug.Log("isk");
+           isColored = false;
+           GameManager.Instance.DestroyDestinations();
     }
     
     public float detectDistance = 0.1f; 
@@ -46,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         int i = 0;
         // Detect box objects on the left
         RaycastHit leftHit;
-        if (Physics.Raycast(transform.position, -transform.right, out leftHit, detectDistance))
+        if (Physics.Raycast(transform.position, - transform.right, out leftHit, detectDistance))
         {
             GameObject obj = leftHit.collider.gameObject;
             if (obj.CompareTag(boxTag) && obj.GetComponent<BoxMovement>().CanMove(Vector3.left) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
@@ -111,9 +124,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-        for(int x = 0; x<4; x++){ 
-        Debug.Log(Directions[x]);
-        }
+       
         return Directions;
     }
 }

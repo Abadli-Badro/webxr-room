@@ -5,8 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-   
-    
     [SerializeField] private GameObject wall;
     [SerializeField] private GameObject floor;
     [SerializeField] private GameObject box;
@@ -16,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject youWin;
     [SerializeField] private GameObject menu;
 
-    public float Scale = 0.2f;
+    public float Scale = 0.4f;
     public float offsetX = 0f;
     public float offsetY = 0f;
     public float offsetZ = 1f;
@@ -29,6 +27,15 @@ public class GameManager : MonoBehaviour
     {
         StartGame();
         Instance = this;
+    }
+
+    public void DestroyDestinations()
+    {
+        GameObject[] destinations = GameObject.FindGameObjectsWithTag("Destination");
+        for (int i = 0; i < destinations.Length; i++)
+        {
+            Destroy(destinations[i]);
+        }
     }
 
     void Update()

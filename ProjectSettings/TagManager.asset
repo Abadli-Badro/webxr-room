@@ -6,6 +6,10 @@ TagManager:
   tags:
   - InvalidPointerLocation
   - ObjectA
+  - Wall
+  - Box
+  - Block
+  - Destination
   layers:
   - Default
   - TransparentFX

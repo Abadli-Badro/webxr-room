@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class ChangePosition : MonoBehaviour
 {
-    public PlayerMovement player;
 
-    public void MovePlayer()
-    {      
-      player.PlayerMove(transform.position);
-      transform.parent.gameObject.SetActive(false);
+    public PlayerMovement player;
+    GameManager gameManager;
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 
+    private void OnMouseDown()
+    {
+        Vector3 position = transform.position;
+        Debug.Log("dest"+position);
+        player.transform.position = transform.position + Vector3.up * gameManager.Scale;
+        player.StopColors();
+   }
 }

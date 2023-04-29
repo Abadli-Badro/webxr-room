@@ -14,7 +14,7 @@ public class BoxMovement : MonoBehaviour
         gameManager = GameManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
-    public void MoveBox()
+    public void OnMouseDown()
     {
         PushBox();
         player.StopColors();
@@ -32,7 +32,7 @@ public class BoxMovement : MonoBehaviour
         Vector3[] directions = player.DetectBoxObjects();
         for (int i = 0; i < 4; i++)
         {
-            if (CanMove(directions[i] * gameManager.Scale) && transform.position - player.transform.position == directions[i] * gameManager.Scale)
+            if (CanMove(directions[i] * gameManager.Scale) && transform.position - player.transform.position == directions[i] * gameManager.Scale && player.isColored)
             {
                 transform.Translate(directions[i] * gameManager.Scale);
                 player.transform.Translate(directions[i] * gameManager.Scale);
