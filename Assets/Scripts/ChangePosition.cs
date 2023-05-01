@@ -14,11 +14,11 @@ public class ChangePosition : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 
-    public void ChangePosClick()
+    public void OnMouseDown()
     {
         Debug.Log("Changing Position");
-        Vector3 position = transform.position;
+        
         player.transform.position = transform.position + Vector3.up * gameManager.Scale;
-        player.StopColors();
+        player.ChangeColors();
    }
 }

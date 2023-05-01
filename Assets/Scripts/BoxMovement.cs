@@ -28,7 +28,11 @@ public class BoxMovement : MonoBehaviour
         if (!player.isColored && GetComponent<MeshRenderer>().material.color == Color.blue)
             GetComponent<MeshRenderer>().material.color = new Color(0.254f, 0.169f, 0.063f, 1f);
     }
-
+    private void OnMouseDown()
+    {
+        PushBox();
+        
+    }
 
     public void PushBox()
     {
@@ -39,7 +43,7 @@ public class BoxMovement : MonoBehaviour
             {
                 transform.Translate(directions[i] * gameManager.Scale);
                 player.transform.Translate(directions[i] * gameManager.Scale);
-                player.isColored = false;
+                player.ChangeColors();
                 if (player.isColored)
                     GetComponent<MeshRenderer>().material.color = Color.blue;
                 else

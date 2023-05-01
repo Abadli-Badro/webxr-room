@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isColored = false;
     GameManager gameManager;
-    [SerializeField] GameObject destination;
+    [SerializeField] GameObject Bottom;
     
     void Start()
     {
@@ -22,69 +22,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void Player(ObjectPointer.EventData data)
     {
-        if (data.CollisionData.transform.tag == "Player")
-        {
-            Debug.Log("Player method called");
-            isColored = !isColored;
-            Debug.Log("Color:" + isColored);
-            if (isColored)
-            {
-                var d1 = Instantiate(destination, transform.position + new Vector3(-1, -1, 0) * 0.2f, transform.rotation);
-                d1.transform.parent = transform;
-                Debug.Log(d1.transform.position);
-                var d2 = Instantiate(destination, transform.position + new Vector3(1, -1, 0) * 0.2f, transform.rotation);
-                d2.transform.parent = transform;
-                Debug.Log(d2.transform.position);
-                var d3 = Instantiate(destination, transform.position + new Vector3(0, -1, 1) * 0.2f, transform.rotation);
-                d3.transform.parent = transform;
-                Debug.Log(d3.transform.position);
-                var d4 = Instantiate(destination, transform.position + new Vector3(0, -1, -1) * 0.2f, transform.rotation);
-                d4.transform.parent = transform;
-                Debug.Log(d4.transform.position);
-            }
-            else
-            {
-                gameManager.DestroyDestinations();
-            }
-            DetectBoxObjects();
-            Debug.Log("Player method finished");
-        }
+       
     }
 
     private void OnMouseDown()
     {
-        Debug.Log("Player method called");
-        isColored = !isColored;
-        Debug.Log("Color:" + isColored);
-        if (isColored)
-        {
-            var d1 = Instantiate(destination, transform.position + new Vector3(-1, -1, 0) * 0.2f, transform.rotation);
-            d1.transform.parent = transform;
-            Debug.Log(d1.transform.position);
-            var d2 = Instantiate(destination, transform.position + new Vector3(1, -1, 0) * 0.2f, transform.rotation);
-            d2.transform.parent = transform;
-            Debug.Log(d2.transform.position);
-            var d3 = Instantiate(destination, transform.position + new Vector3(0, -1, 1) * 0.2f, transform.rotation);
-            d3.transform.parent = transform;
-            Debug.Log(d3.transform.position);
-            var d4 = Instantiate(destination, transform.position + new Vector3(0, -1, -1) * 0.2f, transform.rotation);
-            d4.transform.parent = transform;
-            Debug.Log(d4.transform.position);
-        }
-        else
-        {
-            gameManager.DestroyDestinations();
-        }
-        DetectBoxObjects();
-        Debug.Log("Player method finished");
+        ChangeColors();
     }
 
 
-    public void StopColors()
+    public void ChangeColors()
     {
-           Debug.Log("isk");
-           isColored = false;
-           GameManager.Instance.DestroyDestinations();
+        isColored = !isColored;
+        Bottom.SetActive(isColored);
+        DetectBoxObjects();
     }
     
     public float detectDistance = 0.1f; 
