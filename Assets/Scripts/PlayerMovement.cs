@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using Zinnia.Pointer;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,24 +20,66 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
-    public void OnMouseDown()
+    public void Player(ObjectPointer.EventData data)
     {
+        if (data.CollisionData.transform.tag == "Player")
+        {
+            Debug.Log("Player method called");
+            isColored = !isColored;
+            Debug.Log("Color:" + isColored);
+            if (isColored)
+            {
+                var d1 = Instantiate(destination, transform.position + new Vector3(-1, -1, 0) * 0.2f, transform.rotation);
+                d1.transform.parent = transform;
+                Debug.Log(d1.transform.position);
+                var d2 = Instantiate(destination, transform.position + new Vector3(1, -1, 0) * 0.2f, transform.rotation);
+                d2.transform.parent = transform;
+                Debug.Log(d2.transform.position);
+                var d3 = Instantiate(destination, transform.position + new Vector3(0, -1, 1) * 0.2f, transform.rotation);
+                d3.transform.parent = transform;
+                Debug.Log(d3.transform.position);
+                var d4 = Instantiate(destination, transform.position + new Vector3(0, -1, -1) * 0.2f, transform.rotation);
+                d4.transform.parent = transform;
+                Debug.Log(d4.transform.position);
+            }
+            else
+            {
+                gameManager.DestroyDestinations();
+            }
+            DetectBoxObjects();
+            Debug.Log("Player method finished");
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("Player method called");
         isColored = !isColored;
+        Debug.Log("Color:" + isColored);
         if (isColored)
         {
-            Instantiate(destination, transform.position + (Vector3.left + Vector3.down) * gameManager.Scale, transform.rotation);
-            Instantiate(destination, transform.position + (Vector3.right + Vector3.down) * gameManager.Scale, transform.rotation);
-            Instantiate(destination, transform.position + (Vector3.forward + Vector3.down) * gameManager.Scale, transform.rotation);
-            Instantiate(destination, transform.position + (Vector3.back + Vector3.down) * gameManager.Scale, transform.rotation);
+            var d1 = Instantiate(destination, transform.position + new Vector3(-1, -1, 0) * 0.2f, transform.rotation);
+            d1.transform.parent = transform;
+            Debug.Log(d1.transform.position);
+            var d2 = Instantiate(destination, transform.position + new Vector3(1, -1, 0) * 0.2f, transform.rotation);
+            d2.transform.parent = transform;
+            Debug.Log(d2.transform.position);
+            var d3 = Instantiate(destination, transform.position + new Vector3(0, -1, 1) * 0.2f, transform.rotation);
+            d3.transform.parent = transform;
+            Debug.Log(d3.transform.position);
+            var d4 = Instantiate(destination, transform.position + new Vector3(0, -1, -1) * 0.2f, transform.rotation);
+            d4.transform.parent = transform;
+            Debug.Log(d4.transform.position);
         }
         else
         {
             gameManager.DestroyDestinations();
-        }       
+        }
         DetectBoxObjects();
+        Debug.Log("Player method finished");
     }
-    
+
+
     public void StopColors()
     {
            Debug.Log("isk");

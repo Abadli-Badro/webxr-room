@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Zinnia.Pointer;
 
 public class BoxMovement : MonoBehaviour
 {
@@ -14,10 +15,12 @@ public class BoxMovement : MonoBehaviour
         gameManager = GameManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
-    public void OnMouseDown()
+    public void BoxClick()
     {
+        Debug.Log("Box method called");
         PushBox();
-        player.StopColors();
+        //player.StopColors();
+        Debug.Log("Box method done");
     }
 
     private void Update()

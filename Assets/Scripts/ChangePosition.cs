@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zinnia.Pointer;
 
 public class ChangePosition : MonoBehaviour
 {
@@ -13,10 +14,10 @@ public class ChangePosition : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 
-    private void OnMouseDown()
+    public void ChangePosClick()
     {
+        Debug.Log("Changing Position");
         Vector3 position = transform.position;
-        Debug.Log("dest"+position);
         player.transform.position = transform.position + Vector3.up * gameManager.Scale;
         player.StopColors();
    }
