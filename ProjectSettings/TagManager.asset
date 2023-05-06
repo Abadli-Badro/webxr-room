@@ -10,6 +10,15 @@ TagManager:
   - Box
   - Block
   - Destination
+  - Bottom
+  - Right
+  - Left
+  - Back
+  - Forward
+  - Box1
+  - Box2
+  - Box3
+  - Box4
   layers:
   - Default
   - TransparentFX

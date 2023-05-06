@@ -7,8 +7,6 @@ using Zinnia.Pointer;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-
     public bool isColored = false;
     GameManager gameManager;
     [SerializeField] GameObject Bottom;
@@ -17,24 +15,65 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("player" + transform.position);
         gameManager = GameManager.Instance;
-    }
 
+        Debug.Log("Bottom active" + Bottom.transform.position);
+        Bottom.SetActive(false);
+        Debug.Log("Bottom !active" + Bottom.transform.position);
+    }
 
     public void Player(ObjectPointer.EventData data)
     {
-       
+        Debug.Log("Player method called");
+        if (data.CollisionData.transform.tag == "Player")
+        {
+            if (!isColored)
+            {
+                Debug.Log("!color");
+                ChangeColors();
+            }
+            else
+            {
+                Debug.Log("color");
+                Bottom.SetActive(false);
+                isColored = !isColored;
+            }
+            Debug.Log("Player method finished");
+        }
     }
-
+  
     private void OnMouseDown()
     {
-        ChangeColors();
+        //ChangeColors();
+        if (!isColored)
+        {
+            Debug.Log("!color");
+            ChangeColors();
+            Bottom.SetActive(true);
+            isColored = true;
+        }
+        else
+        {
+            Debug.Log("color");
+            //gameManager.DestroyDestinations();
+            Bottom.SetActive(false);
+            isColored = false;
+        }
+        Debug.Log("Player method finished");
     }
 
 
     public void ChangeColors()
     {
-        isColored = !isColored;
-        Bottom.SetActive(isColored);
+        Debug.Log("Change COlORS");
+        if(!isColored) {
+            isColored = true;
+            Bottom.SetActive(true);
+        }
+        else {
+            isColored = false;
+            Bottom.SetActive(false);
+        }
+        
         DetectBoxObjects();
     }
     
@@ -44,38 +83,43 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3[] DetectBoxObjects()
     {
-        
+        Debug.Log("DETECTING OBJECTS...");
+
         Vector3[] Directions = new Vector3[4];
         int i = 0;
         // Detect box objects on the left
+
         RaycastHit leftHit;
         if (Physics.Raycast(transform.position, - transform.right, out leftHit, detectDistance))
         {
             GameObject obj = leftHit.collider.gameObject;
-            if (obj.CompareTag(boxTag) && obj.GetComponent<BoxMovement>().CanMove(Vector3.left) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
+            if ((obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") && obj.GetComponent<BoxMovement>().CanMove(Vector3.left) && Vector3.Distance(transform.position, obj.transform.position) <= 1f))
             {
                 Renderer rend = obj.GetComponent<MeshRenderer>();
                 if (rend != null)
                 {
                     rend.material.color = Color.blue;
-                    Directions[i] = Vector3.left;
+                    Directions[i] = new Vector3 (-1,0,0);
+                    Debug.Log("Right" + Directions[i]);
                     i++;
                 }
             }
         }
 
+        
         // Detect box objects on the right
         RaycastHit rightHit;
         if (Physics.Raycast(transform.position, transform.right, out rightHit, detectDistance))
         {
             GameObject obj = rightHit.collider.gameObject;
-            if (obj.CompareTag(boxTag) && obj.GetComponent<BoxMovement>().CanMove(Vector3.right) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
+            if ((obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") && obj.GetComponent<BoxMovement>().CanMove(Vector3.right) && Vector3.Distance(transform.position, obj.transform.position) <= 1f))
             {
                 Renderer rend = obj.GetComponent<MeshRenderer>();
                 if (rend != null)
                 {
                     rend.material.color = Color.blue;
-                    Directions[i] = Vector3.right;
+                    Directions[i] = new Vector3 (1,0,0);
+                    Debug.Log("Right" + Directions[i]);
                     i++;
                 }
             }
@@ -86,13 +130,15 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out forwardHit, detectDistance))
         {
             GameObject obj = forwardHit.collider.gameObject;
-            if (obj.CompareTag(boxTag) && obj.GetComponent<BoxMovement>().CanMove(Vector3.forward) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
+            if (obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") && obj.GetComponent<BoxMovement>().CanMove(Vector3.forward) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
             {
+                
                 Renderer rend = obj.GetComponent<MeshRenderer>();
                 if (rend != null)
                 {
                     rend.material.color = Color.blue;
-                    Directions[i] = Vector3.forward;
+                    Directions[i] = new Vector3 (0, 0, 1);
+                    Debug.Log("FORWARD" + Directions[i]);
                     i++;
                 }
             }
@@ -103,13 +149,14 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position, -transform.forward, out backwardHit, detectDistance))
         {
             GameObject obj = backwardHit.collider.gameObject;
-            if (obj.CompareTag(boxTag) && obj.GetComponent<BoxMovement>().CanMove(Vector3.back) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
+            if (obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") && obj.GetComponent<BoxMovement>().CanMove(Vector3.back) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
             {
                 Renderer rend = obj.GetComponent<MeshRenderer>();
                 if (rend != null)
                 {
                     rend.material.color = Color.blue;
-                    Directions[i] = Vector3.back;
+                    Directions[i] = new Vector3 (0,0,-1);
+                    Debug.Log("Back" + Directions[i]);
                     i++;
                 }
             }

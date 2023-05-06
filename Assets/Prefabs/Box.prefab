@@ -68,10 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a05ffd67ebd0c64b98e2d7ceab16f8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayLength: 0.2
-  rayOffsetX: 0.05
-  rayOffsetY: 0
-  rayOffsetZ: 0.05
 --- !u!23 &7693316929151047471
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -92,7 +88,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4cd790ac0d37bdc46970f6688c6b5070, type: 2}
+  - {fileID: 2100000, guid: 4a3c4e9ae9b122e449659fdb803fb1dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

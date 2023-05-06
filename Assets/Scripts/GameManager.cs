@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartGame();
+        //StartGame();
         Instance = this;
     }
 
@@ -57,24 +58,10 @@ public class GameManager : MonoBehaviour
             x += Scale;
         }
     }
-    void DestroyLevel(int[,] level)
+    void DestroyLevel()
     {
-        GameObject[] Boxes = GameObject.FindGameObjectsWithTag("Box");
-        GameObject[] Walls = GameObject.FindGameObjectsWithTag("Wall");
-        GameObject[] Blocks = GameObject.FindGameObjectsWithTag("Block");
-        Destroy(GameObject.FindGameObjectWithTag("Player"));
-        foreach(GameObject Block in Blocks)
-        {
-            Destroy(Block);
-        }
-        foreach (GameObject Wall in Walls)
-        {
-            Destroy(Wall);
-        }
-        foreach (GameObject Box in Boxes)
-        {
-            Destroy(Box);
-        }
+        GameObject level = GameObject.Find("Level");
+        level.SetActive(false);
 
     }
     void GetBlock(int block, float x, float z)
@@ -124,29 +111,20 @@ public class GameManager : MonoBehaviour
         }
         if (checkedTrigger == len)
         {
-            if (level == Levels.levels.Count-1)
-            {
-                DestroyLevel(Levels.levels[level]);
-           //     menu.gameObject.SetActive(true);
-            }
-            else
-            {
-                DestroyLevel(Levels.levels[level]);
-              //  youWin.gameObject.SetActive(true);
-            }
+            DestroyLevel();
             return true;
         }
         return false;
     }
     public void RestartLevel()
     {
-        DestroyLevel(Levels.levels[level]);
+        DestroyLevel();
      //   youWin.SetActive(false);
         CreateLevel(Levels.levels[level]);
     }
     public void NextLevel()
     {
-        DestroyLevel(Levels.levels[level]);
+        DestroyLevel();
         youWin.SetActive(false);
         level++;
         CreateLevel(Levels.levels[level]);
@@ -154,7 +132,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
       //  menu.gameObject.SetActive(false);
-        DestroyLevel(Levels.levels[level]);
+        DestroyLevel();
         level = 0;
         CreateLevel(Levels.levels[level]);
     }

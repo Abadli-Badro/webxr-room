@@ -4,43 +4,35 @@ using Zinnia.Pointer;
 public class PointerInput : MonoBehaviour
 {
     [SerializeField] GameObject destination;
-    PlayerMovement player;
+    GameObject player;
     GameManager gameManager;
     public float detectDistance = 0.1f;
     public string boxTag = "Box";
     private void Start()
     {
         gameManager = GameManager.Instance;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        player = GameObject.FindGameObjectWithTag("ObjectA");
     }
     public void Player(ObjectPointer.EventData data)
     {
         if (data.CollisionData.transform.tag == "Player")
         {
-            Debug.Log("Player method called");
-            player.isColored = !player.isColored;
-            Debug.Log("Color:" + player.isColored);
-            if (player.isColored)
-            {
-                var d1 = Instantiate(destination, transform.position + new Vector3(-1,-1,0) * 0.2f, transform.rotation);
-                d1.transform.parent = transform;
-                Debug.Log(d1.transform.position);
-                var d2 = Instantiate(destination, transform.position + new Vector3(1,-1,0) * 0.2f, transform.rotation);
-                d2.transform.parent = transform;
-                Debug.Log(d2.transform.position);
-                var d3 = Instantiate(destination, transform.position + new Vector3(0,-1,1) * 0.2f, transform.rotation);
-                d3.transform.parent = transform;
-                Debug.Log(d3.transform.position);
-                var d4 = Instantiate(destination, transform.position + new Vector3(0,-1,-1) * 0.2f, transform.rotation);
-                d4.transform.parent = transform;
-                Debug.Log(d4.transform.position);
-            }
-            else
-            {
-                gameManager.DestroyDestinations();
-            }
-            DetectBoxObjects();
-            Debug.Log("Player method finished");
+            Debug.Log("DISABLED");
+          player.SetActive(false);
+        }
+        if (data.CollisionData.transform.tag == "Box")
+        {
+            Debug.Log("ENABLED");
+            player.SetActive(true);
+        }
+    }
+
+    public void enable(ObjectPointer.EventData data)
+    {
+        if (data.CollisionData.transform.tag == "Box")
+        {
+            Debug.Log("ENABLED");
+            player.SetActive(true);
         }
     }
 

@@ -7,7 +7,7 @@ public class WinningTrigger : MonoBehaviour
     public bool triggerChecked= false;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Box"))
+        if (other.gameObject.CompareTag("Box1") || other.gameObject.CompareTag("Box2") || other.gameObject.CompareTag("Box3") || other.gameObject.CompareTag("Box4"))
         {
             triggerChecked = true;
         }
