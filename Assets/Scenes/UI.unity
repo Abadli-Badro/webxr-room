@@ -241,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 19082899}
   m_Layer: 0
-  m_Name: player
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,14 +254,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19082898}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1166480237}
   m_Father: {fileID: 104110943}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &25117984
 GameObject:
@@ -850,9 +850,9 @@ Transform:
   m_Children:
   - {fileID: 1525890373}
   - {fileID: 2080419512}
+  - {fileID: 224406786}
   - {fileID: 1475095346}
   - {fileID: 19082899}
-  - {fileID: 224406786}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1668,7 +1668,7 @@ Transform:
   - {fileID: 2142340604}
   - {fileID: 1916052000}
   m_Father: {fileID: 104110943}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &225166331
 GameObject:
@@ -7057,12 +7057,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f093ae663dfba47ae29bfb7bd21616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall: {fileID: 0}
-  floor: {fileID: 0}
+  wall: {fileID: 7184257901180797744, guid: b2eea88f1888c224180c99d2ad44ff1b, type: 3}
+  floor: {fileID: 630577749257922292, guid: 88f0b4e70ecd665489f8c71e9aae625b, type: 3}
   box: {fileID: 0}
   player: {fileID: 0}
-  ArrivalPoint: {fileID: 0}
-  ArrivalTrigger: {fileID: 0}
+  ArrivalPoint: {fileID: 4141853289734882591, guid: 06c89b6c1d48648408b7f49feb9edada, type: 3}
+  ArrivalTrigger: {fileID: 2215311945315405383, guid: da4bc2450ea6a0b44b22d1dbe22177bc, type: 3}
   youWin: {fileID: 0}
   menu: {fileID: 0}
   Scale: 0.4
@@ -11970,7 +11970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1475095346}
   m_Layer: 0
-  m_Name: boxes
+  m_Name: Boxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11983,7 +11983,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475095345}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11993,7 +11993,7 @@ Transform:
   - {fileID: 1170766942}
   - {fileID: 1749284825}
   m_Father: {fileID: 104110943}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1485160545
 GameObject:

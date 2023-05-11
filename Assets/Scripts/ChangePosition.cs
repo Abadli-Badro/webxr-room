@@ -22,18 +22,8 @@ public class ChangePosition : MonoBehaviour
         player.transform.Translate(transform.position.x - player.transform.position.x, 0f, transform.position.z - player.transform.position.z);
         //player.transform.Translate(transform.position + new Vector3(0, 0, 0.2f));
         player.ChangeColors();
-   }
-
-    public void ChangeDirection(ObjectPointer.EventData data)
-    {
-        if (data.CollisionData.transform.tag == "Destination")
-        {
-            Debug.Log(transform.position);
-            player.transform.Translate(transform.position.x - player.transform.position.x , 0f , transform.position.z - player.transform.position.z);
-            Debug.Log(player.transform.position);
-            player.ChangeColors();
-        }  
     }
+
     public void ChangeDirectionLeft(ObjectPointer.EventData data)
     {
         if (data.CollisionData.transform.tag == "Left")

@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //StartGame();
+        StartGame();
         Instance = this;
     }
 
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-    bool CheckWin()
+    bool CheckWin()                                                             //compare the number of boxes that are on the winning positions with the number of the positions, if it is equal then the level has ended
     {
         WinningTrigger[] WinningScript = FindObjectsOfType<WinningTrigger>();
 
@@ -132,8 +132,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
       //  menu.gameObject.SetActive(false);
-        DestroyLevel();
-        level = 0;
+        //DestroyLevel();
+        level = 1;
         CreateLevel(Levels.levels[level]);
     }
 

@@ -21,11 +21,11 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Bottom !active" + Bottom.transform.position);
     }
 
-    public void Player(ObjectPointer.EventData data)
+    public void Player(ObjectPointer.EventData data)                        //controls the pointer input (selecting the player) and colors the player and the available positions when activated
     {
-        Debug.Log("Player method called");
-        if (data.CollisionData.transform.tag == "Player")
+        if (data.CollisionData.transform.tag == "Player")                   //the pointer is in collision with the player object, which triggers this function 
         {
+            Debug.Log("Player method called");
             if (!isColored)
             {
                 Debug.Log("!color");
@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void ChangeColors()
+    public void ChangeColors()                                           //colors the player and available destinations, also checks if there are any boxes nearby and colors them as well
     {
         Debug.Log("Change COlORS");
         if(!isColored) {
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
     public string boxTag = "Box"; 
 
 
-    public Vector3[] DetectBoxObjects()
+    public Vector3[] DetectBoxObjects()                                 //Detects boxes near the player and colors them, returns the directions of those boxes
     {
         Debug.Log("DETECTING OBJECTS...");
 
