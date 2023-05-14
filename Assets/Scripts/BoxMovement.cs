@@ -56,18 +56,28 @@ public class BoxMovement : MonoBehaviour
         if (data.CollisionData.transform.tag == "Box4")
             PushBox();
     }
-
+    public void ClickBox5(ObjectPointer.EventData data)
+    {
+        if (data.CollisionData.transform.tag == "Box5")
+            PushBox();
+    }
+    public void ClickBox6(ObjectPointer.EventData data)
+    {
+        if (data.CollisionData.transform.tag == "Box6")
+            PushBox();
+    }
     public void PushBox()
     {
         GameObject Box = GameObject.FindGameObjectWithTag("Box1");
-        if (transform.tag.Equals("Box2")) {  Box = GameObject.FindGameObjectWithTag("Box2"); }
-        else if (transform.tag.Equals("Box3")) {  Box = GameObject.FindGameObjectWithTag("Box3"); }
-        else if (transform.tag.Equals("Box4")) {  Box = GameObject.FindGameObjectWithTag("Box4"); }
-
+        if (transform.tag.Equals("Box2")) { Box = GameObject.FindGameObjectWithTag("Box2"); }
+        else if (transform.tag.Equals("Box3")) { Box = GameObject.FindGameObjectWithTag("Box3"); }
+        else if (transform.tag.Equals("Box4")) { Box = GameObject.FindGameObjectWithTag("Box4"); }
+        else if (transform.tag.Equals("Box5")) { Box = GameObject.FindGameObjectWithTag("Box5"); }
+        else if (transform.tag.Equals("Box6")) { Box = GameObject.FindGameObjectWithTag("Box6"); }
         Vector3[] directions = player.DetectBoxObjects();
         for (int i = 0; i < 4; i++)
         {
-            Debug.Log("direction is :"+ (Box.transform.position - player.transform.position));
+            Debug.Log("direction is :" + (Box.transform.position - player.transform.position));
             if (CanMove(directions[i] * 0.2f) && Box.transform.position - player.transform.position == directions[i] * 0.2f && player.isColored)
             {
                 if (!directions[i].Equals(Vector3.zero))
@@ -103,9 +113,9 @@ public class BoxMovement : MonoBehaviour
                 return false;
             }
             // If the obstacle is another box, check if it can move in the same direction
-            else if (hit.collider.CompareTag("Box1") || hit.collider.CompareTag("Box2") || hit.collider.CompareTag("Box3") || hit.collider.CompareTag("Box4"))
+            else if (hit.collider.CompareTag("Box1") || hit.collider.CompareTag("Box2") || hit.collider.CompareTag("Box3") || hit.collider.CompareTag("Box4") || hit.collider.CompareTag("Box5") || hit.collider.CompareTag("Box6"))
             {
-                Box box = hit.collider.GetComponent<Box>();
+
                 return false;
             }
         }

@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isColored = false;
     GameManager gameManager;
     [SerializeField] GameObject Bottom;
-    
+
     void Start()
     {
         Debug.Log("player" + transform.position);
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Player method finished");
         }
     }
-  
+
     private void OnMouseDown()
     {
         //ChangeColors();
@@ -65,20 +65,22 @@ public class PlayerMovement : MonoBehaviour
     public void ChangeColors()                                           //colors the player and available destinations, also checks if there are any boxes nearby and colors them as well
     {
         Debug.Log("Change COlORS");
-        if(!isColored) {
+        if (!isColored)
+        {
             isColored = true;
             Bottom.SetActive(true);
         }
-        else {
+        else
+        {
             isColored = false;
             Bottom.SetActive(false);
         }
-        
+
         DetectBoxObjects();
     }
-    
-    public float detectDistance = 0.1f; 
-    public string boxTag = "Box"; 
+
+    public float detectDistance = 0.1f;
+    public string boxTag = "Box";
 
 
     public Vector3[] DetectBoxObjects()                                 //Detects boxes near the player and colors them, returns the directions of those boxes
@@ -90,35 +92,35 @@ public class PlayerMovement : MonoBehaviour
         // Detect box objects on the left
 
         RaycastHit leftHit;
-        if (Physics.Raycast(transform.position, - transform.right, out leftHit, detectDistance))
+        if (Physics.Raycast(transform.position, -transform.right, out leftHit, detectDistance))
         {
             GameObject obj = leftHit.collider.gameObject;
-            if ((obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") && obj.GetComponent<BoxMovement>().CanMove(Vector3.left) && Vector3.Distance(transform.position, obj.transform.position) <= 1f))
+            if ((obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") || obj.CompareTag("Box5") || obj.CompareTag("Box6")) && obj.GetComponent<BoxMovement>().CanMove(Vector3.left) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
             {
                 Renderer rend = obj.GetComponent<MeshRenderer>();
                 if (rend != null)
                 {
                     rend.material.color = Color.blue;
-                    Directions[i] = new Vector3 (-1,0,0);
+                    Directions[i] = new Vector3(-1, 0, 0);
                     Debug.Log("Right" + Directions[i]);
                     i++;
                 }
             }
         }
 
-        
+
         // Detect box objects on the right
         RaycastHit rightHit;
         if (Physics.Raycast(transform.position, transform.right, out rightHit, detectDistance))
         {
             GameObject obj = rightHit.collider.gameObject;
-            if ((obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") && obj.GetComponent<BoxMovement>().CanMove(Vector3.right) && Vector3.Distance(transform.position, obj.transform.position) <= 1f))
+            if ((obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") || obj.CompareTag("Box5") || obj.CompareTag("Box6")) && obj.GetComponent<BoxMovement>().CanMove(Vector3.right) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
             {
                 Renderer rend = obj.GetComponent<MeshRenderer>();
                 if (rend != null)
                 {
                     rend.material.color = Color.blue;
-                    Directions[i] = new Vector3 (1,0,0);
+                    Directions[i] = new Vector3(1, 0, 0);
                     Debug.Log("Right" + Directions[i]);
                     i++;
                 }
@@ -130,14 +132,14 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out forwardHit, detectDistance))
         {
             GameObject obj = forwardHit.collider.gameObject;
-            if (obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") && obj.GetComponent<BoxMovement>().CanMove(Vector3.forward) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
+            if ((obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") || obj.CompareTag("Box5") || obj.CompareTag("Box6")) && obj.GetComponent<BoxMovement>().CanMove(Vector3.forward) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
             {
-                
+
                 Renderer rend = obj.GetComponent<MeshRenderer>();
                 if (rend != null)
                 {
                     rend.material.color = Color.blue;
-                    Directions[i] = new Vector3 (0, 0, 1);
+                    Directions[i] = new Vector3(0, 0, 1);
                     Debug.Log("FORWARD" + Directions[i]);
                     i++;
                 }
@@ -149,19 +151,19 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position, -transform.forward, out backwardHit, detectDistance))
         {
             GameObject obj = backwardHit.collider.gameObject;
-            if (obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") && obj.GetComponent<BoxMovement>().CanMove(Vector3.back) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
+            if ((obj.CompareTag("Box1") || obj.CompareTag("Box2") || obj.CompareTag("Box3") || obj.CompareTag("Box4") || obj.CompareTag("Box5") || obj.CompareTag("Box6")) && obj.GetComponent<BoxMovement>().CanMove(Vector3.back) && Vector3.Distance(transform.position, obj.transform.position) <= 1f)
             {
                 Renderer rend = obj.GetComponent<MeshRenderer>();
                 if (rend != null)
                 {
                     rend.material.color = Color.blue;
-                    Directions[i] = new Vector3 (0,0,-1);
+                    Directions[i] = new Vector3(0, 0, -1);
                     Debug.Log("Back" + Directions[i]);
                     i++;
                 }
             }
         }
-       
+        Debug.Log("Directions : "+Directions);
         return Directions;
     }
 }

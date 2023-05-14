@@ -19,6 +19,8 @@ TagManager:
   - Box2
   - Box3
   - Box4
+  - Box6
+  - Box5
   layers:
   - Default
   - TransparentFX
