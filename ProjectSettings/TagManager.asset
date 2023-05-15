@@ -21,6 +21,7 @@ TagManager:
   - Box4
   - Box6
   - Box5
+  - Start Button
   layers:
   - Default
   - TransparentFX

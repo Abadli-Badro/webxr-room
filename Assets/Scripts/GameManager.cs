@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         
         StartGame();
         Instance = this;
+        gameObject.SetActive(false);
     }
 
 

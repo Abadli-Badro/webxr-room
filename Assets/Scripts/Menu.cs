@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zinnia.Pointer;
 
 public class CallAfterDelay : MonoBehaviour
 {
@@ -35,10 +36,14 @@ public class CallAfterDelay : MonoBehaviour
 
 public class Menu : MonoBehaviour
 {
-    public void startGame()
+    public void StartGame(ObjectPointer.EventData data)
     {
-        SceneManager.LoadScene("Main game");
+        if (data.CollisionData.transform.tag == "Start Button")
+        {
+            GameManager.Instance.gameObject.SetActive(true);
+        }
     }
+
 
     public void startSokoban()
     {
