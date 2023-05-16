@@ -1,58 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zinnia.Pointer;
 
-public class CallAfterDelay : MonoBehaviour
-{
-    float delay;
-    System.Action action;
-
-    // Will never call this frame, always the next frame at the earliest
-    public static CallAfterDelay Create(float delay, System.Action action)
-    {
-        CallAfterDelay cad = new GameObject("CallAfterDelay").AddComponent<CallAfterDelay>();
-        cad.delay = delay;
-        cad.action = action;
-        return cad;
-    }
-
-    float age;
-
-    void Update()
-    {
-        if (age > delay)
-        {
-            action();
-            Destroy(gameObject);
-        }
-    }
-    void LateUpdate()
-    {
-        age += Time.deltaTime;
-    }
-}
 
 public class Menu : MonoBehaviour
 {
+    [SerializeField] GameObject Reset;
+    [SerializeField] GameObject About;
+
+    private void OnMouseDown()
+    {
+        GameManager.Instance.RestartLevel();
+    }
     public void StartGame(ObjectPointer.EventData data)
     {
         if (data.CollisionData.transform.tag == "Start Button")
         {
             GameManager.Instance.gameObject.SetActive(true);
+            Reset.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 
-
-    public void startSokoban()
+    public void ResetGame(ObjectPointer.EventData data)
     {
-        SceneManager.LoadScene("Sokoban", LoadSceneMode.Additive);
+        if (data.CollisionData.transform.tag == "Reset Button")
+        {
+            GameManager.Instance.RestartLevel();
+        }
+    }
 
-        CallAfterDelay.Create(1, () => {
-              UnityEngine.SceneManagement.SceneManager.SetActiveScene(
-              UnityEngine.SceneManagement.SceneManager.GetSceneByName("Sokoban"));
-        });
+    public void AboutOpen(ObjectPointer.EventData data)
+    {
+        if (data.CollisionData.transform.tag == "About Button")
+        {
+            About.SetActive(true);
+        }
+    }
+
+    public void AboutClose(ObjectPointer.EventData data)
+    {
+        if (data.CollisionData.transform.tag == "About (close)")
+        {
+            About.SetActive(false);
+        }
     }
 
     public void quitGame()

@@ -22,6 +22,9 @@ TagManager:
   - Box6
   - Box5
   - Start Button
+  - Reset Button
+  - About Button
+  - About (close)
   layers:
   - Default
   - TransparentFX
