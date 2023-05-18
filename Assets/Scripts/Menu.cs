@@ -7,12 +7,10 @@ using Zinnia.Pointer;
 public class Menu : MonoBehaviour
 {
     [SerializeField] GameObject Reset;
+    [SerializeField] GameObject About_Menu;
+    [SerializeField] GameObject Start;
     [SerializeField] GameObject About;
 
-    private void OnMouseDown()
-    {
-        GameManager.Instance.RestartLevel();
-    }
     public void StartGame(ObjectPointer.EventData data)
     {
         if (data.CollisionData.transform.tag == "Start Button")
@@ -35,7 +33,10 @@ public class Menu : MonoBehaviour
     {
         if (data.CollisionData.transform.tag == "About Button")
         {
-            About.SetActive(true);
+            gameObject.SetActive(false);
+            Start.SetActive(false);
+            About_Menu.SetActive(true);
+
         }
     }
 
@@ -43,7 +44,9 @@ public class Menu : MonoBehaviour
     {
         if (data.CollisionData.transform.tag == "About (close)")
         {
-            About.SetActive(false);
+            About_Menu.SetActive(false);
+            About.SetActive(true);
+            Start.SetActive(true);
         }
     }
 
