@@ -14,7 +14,7 @@ public class WinningTrigger : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Box"))
+        if (other.gameObject.CompareTag("Box1") || other.gameObject.CompareTag("Box2") || other.gameObject.CompareTag("Box3") || other.gameObject.CompareTag("Box4") || other.gameObject.CompareTag("Box5") || other.gameObject.CompareTag("Box6"))
         {
             triggerChecked = false;
         }

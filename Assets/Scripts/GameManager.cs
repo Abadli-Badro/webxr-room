@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ArrivalTrigger;
     [SerializeField] private GameObject youWin;
     [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject reset;
 
     int boxNum = 0;
     public float Scale = 0.4f;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     public float offsetY = 0f;
     public float offsetZ = 1f;
 
-    private int level = 0;
+    public int level = 0;
 
     public static GameManager Instance;
 
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
             x += Scale;
         }
     }
-    void DestroyLevel()
+    public void DestroyLevel()
     {
         player.transform.position = new Vector3(2000, 2000, 2000);
         for (int i = 0; i < 6; i++)
@@ -121,7 +122,18 @@ public class GameManager : MonoBehaviour
         }
         if (checkedTrigger == len)
         {
-            NextLevel();
+            if (level != Levels.levels.Count - 1)
+            {
+                NextLevel();
+            }
+            else
+            {
+                DestroyLevel();
+                reset.SetActive(false);
+                menu.SetActive(false);
+                youWin.SetActive(true);
+                
+            }
             return true;
         }
         return false;

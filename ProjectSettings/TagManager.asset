@@ -25,6 +25,7 @@ TagManager:
   - Reset Button
   - About Button
   - About (close)
+  - Win (close)
   layers:
   - Default
   - TransparentFX

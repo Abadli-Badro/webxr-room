@@ -10,14 +10,22 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject About_Menu;
     [SerializeField] GameObject Start;
     [SerializeField] GameObject About;
+    [SerializeField] GameObject Main_menu;
+    [SerializeField] GameObject win;
+    [SerializeField] GameManager gm;
+
+    GameManager gameManager;
 
     public void StartGame(ObjectPointer.EventData data)
     {
         if (data.CollisionData.transform.tag == "Start Button")
         {
-            GameManager.Instance.gameObject.SetActive(true);
-            Reset.SetActive(true);
+            gm.gameObject.SetActive(true);
+
             gameObject.SetActive(false);
+            Reset.SetActive(true);
+            About.SetActive(false);
+            
         }
     }
 
@@ -48,6 +56,37 @@ public class Menu : MonoBehaviour
             About.SetActive(true);
             Start.SetActive(true);
         }
+    }
+
+    public void WinClose(ObjectPointer.EventData data)
+    {
+        if (data.CollisionData.transform.tag == "Win (close)")
+        {
+            gm.level = 0;
+            gm.DestroyLevel();
+            gm.RestartLevel();
+            gm.gameObject.SetActive(true);
+
+
+            win.SetActive(false);
+            Reset.SetActive(true);
+            Main_menu.SetActive(true);
+            Start.SetActive(false);
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        gm.level = 0;
+        gm.DestroyLevel();
+        gm.RestartLevel();
+        gm.gameObject.SetActive(true);
+   
+
+        win.SetActive(false);
+        Reset.SetActive(true);
+        Main_menu.SetActive(true);
+        Start.SetActive(false);
     }
 
     public void quitGame()
