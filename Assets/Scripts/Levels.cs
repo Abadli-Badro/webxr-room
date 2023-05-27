@@ -14,7 +14,7 @@ public class Levels : MonoBehaviour
     void Awake()
     {
       levels.Add(Level1);
-    //   levels.Add(Level2);
+      levels.Add(Level2);
     //   levels.Add(Level3);
     //   levels.Add(Level4);
     }

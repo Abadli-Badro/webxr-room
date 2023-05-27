@@ -26,6 +26,7 @@ TagManager:
   - About Button
   - About (close)
   - Win (close)
+  - Door
   layers:
   - Default
   - TransparentFX
