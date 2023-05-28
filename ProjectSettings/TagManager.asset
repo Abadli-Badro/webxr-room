@@ -19,6 +19,14 @@ TagManager:
   - Box2
   - Box3
   - Box4
+  - Box6
+  - Box5
+  - Start Button
+  - Reset Button
+  - About Button
+  - About (close)
+  - Win (close)
+  - Door
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
+using Zinnia.Pointer;
 
 namespace SojaExiles
 
@@ -50,6 +52,18 @@ namespace SojaExiles
 			}
 
 		}
+
+		public void openClose(ObjectPointer.EventData data)
+		{
+            if (data.CollisionData.transform.tag == "Door")
+			{
+				if (open == false) StartCoroutine(opening());
+				else
+				{
+					if (open == true) StartCoroutine(closing());
+				}
+            }
+        }
 
 		IEnumerator opening()
 		{
